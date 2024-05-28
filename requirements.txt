@@ -5,4 +5,7 @@ matplotlib
 dill
 flask
 scipy
--e .
+xgboost
+catboost
+
+# -e .

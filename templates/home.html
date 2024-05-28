@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            margin: 20px 0;
+            color: #343a40;
+            font-size: 2.5em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 700px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            width: 100%;
+            color: #495057;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            color: #495057;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .input-group label,
+        .input-group input[type="number"] {
+            flex: 1 0 48%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Class Prediction</h1>
+        <form action="/" method="post">
+            <div class="input-group">
+                {% for i in range(1, 19) %}
+                    <div>
+                        <label for="T{{ i }}">T{{ i }}:</label>
+                        <input type="number" name="T{{ i }}" id="T{{ i }}" required>
+                    </div>
+                {% endfor %}
+            </div>
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction %}
+            <div class="result">
+                Prediction: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+    <footer>
+        &copy; 2024 Your Company. All rights reserved.
+    </footer>
+</body>
+</html>

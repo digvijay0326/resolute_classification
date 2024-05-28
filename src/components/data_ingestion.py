@@ -18,14 +18,17 @@ class DataIngestion:
             evaluation_df = pd.read_excel("raw_data/test.xlsx")
             os.makedirs(os.path.dirname(self.config.train_data_path),exist_ok=True)
             data_df.to_csv(self.config.data_path, index=False, header=True)
-            train_df, test_df = train_test_split(data_df, test_size=0.2, random_state=42)
+            train_df, temp_df = train_test_split(data_df, test_size=0.2, random_state=42)
+            val_df, test_df = train_test_split(temp_df, test_size=0.5, random_state=42)
             train_df.to_csv(self.config.train_data_path, index=False, header=True)
             test_df.to_csv(self.config.test_data_path, index=False, header=True)
+            val_df.to_csv(self.config.validation_data_path, index=False, header=True)
             evaluation_df.to_csv(self.config.evaluation_data_path, index=False, header=True)
             logging.info("Data loaded successfully")
             
             return(
                 self.config.train_data_path,
+                self.config.validation_data_path,
                 self.config.test_data_path
             )
         except Exception as e:
